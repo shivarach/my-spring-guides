@@ -1,0 +1,31 @@
+
+server:
+  port: 8090
+
+keycloak:
+  auth-server-url: http://localhost:8083/auth
+  realm: demo
+  resource: demo-client
+#  credentials:
+#    secret: ae5f1e6c-f328-4caf-a5eb-b04933036715
+  bearer-only: true
+  public-client: true
+
+  security-constraints:
+    - auth-roles:
+      - employee
+      security-collections:
+      - name:
+        patterns:
+        - /user/*
+    - auth-roles:
+      - admin
+      security-collections:
+      - name:
+        patterns:
+        - /user/*
+        - /admin/*
+
+logging:
+  level:
+    org.keycloak: TRACE
